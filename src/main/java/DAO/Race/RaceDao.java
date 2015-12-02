@@ -41,7 +41,7 @@ public class RaceDao extends AbstractDao<RaceBean> {
         } catch (SQLException e) {
             log.error(e.getMessage());
         } finally {
-            connectionPool.putConnection(connection);
+            connectionPool.freeConnection(connection);
         }
         return race;
     }
@@ -67,7 +67,7 @@ public class RaceDao extends AbstractDao<RaceBean> {
             log.error(e.getMessage());
             return null;
         } finally {
-            connectionPool.putConnection(connection);
+            connectionPool.freeConnection(connection);
         }
         return race;
     }

@@ -160,7 +160,7 @@
     </auth-constraint>
   </security-constraint>
 
-  <!-- Define the Login Configuration for this Application -->
+  <!-- Define the SecurityFilter Configuration for this Application -->
   <login-config>
     <auth-method>BASIC</auth-method>
     <realm-name>Tomcat Manager Application</realm-name>

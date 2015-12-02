@@ -41,7 +41,7 @@ public class HorsesDao extends AbstractDao<HorsesBean> {
         } catch (SQLException e) {
             log.error(e.getMessage());
         } finally {
-            connectionPool.putConnection(connection);
+            connectionPool.freeConnection(connection);
         }
         return horse;
     }
@@ -67,7 +67,7 @@ public class HorsesDao extends AbstractDao<HorsesBean> {
             log.error(e.getMessage());
             return null;
         } finally {
-            connectionPool.putConnection(connection);
+            connectionPool.freeConnection(connection);
         }
         return horses;
     }

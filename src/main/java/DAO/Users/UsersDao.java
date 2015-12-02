@@ -4,13 +4,11 @@ import Controller.ConnectionPool;
 import DAO.AbstractDao;
 import org.apache.log4j.Logger;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-class UsersDao extends AbstractDao<UserBean> {
+public class UsersDao extends AbstractDao<UserBean> {
     private static final Logger log = Logger.getLogger(UsersDao.class);
 
     public UsersDao(ConnectionPool connectionPool) {
@@ -41,7 +39,58 @@ class UsersDao extends AbstractDao<UserBean> {
         } catch (SQLException e) {
            log.error(e.getMessage());
         } finally {
-            connectionPool.putConnection(connection);
+            connectionPool.freeConnection(connection);
+        }
+        return user;
+    }
+
+    public UserBean getUser(String login, String password) {
+        UserBean user = new UserBean();
+
+        String sql = "select * from users where login = ? and password = ?";
+        int result = 0;
+
+        try (Connection connect = connectionPool.getConnection();
+             PreparedStatement prepareStatement = connect.prepareStatement(sql)) {
+            prepareStatement.setString(1, login);
+            prepareStatement.setString(2, password);
+
+            ResultSet rs = prepareStatement.executeQuery();
+            if (rs.next()) {
+                user.setIdUser(rs.getInt("id_user"));
+                user.setName(rs.getString("name"));
+                user.setLogin(rs.getString("login"));
+                user.setPassword(rs.getString("password"));
+                user.setBalance(rs.getDouble("balance"));
+                user.setRole(rs.getString("role"));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return user;
+    }
+
+    public UserBean getUser(String login) {
+        UserBean user = new UserBean();
+
+        String sql = "select * from users where login = ?";
+        int result = 0;
+
+        try (Connection connect = connectionPool.getConnection();
+             PreparedStatement prepareStatement = connect.prepareStatement(sql)) {
+            prepareStatement.setString(1, login);
+
+            ResultSet rs = prepareStatement.executeQuery();
+            if (rs.next()) {
+                user.setIdUser(rs.getInt("id_user"));
+                user.setName(rs.getString("name"));
+                user.setLogin(rs.getString("login"));
+                user.setPassword(rs.getString("password"));
+                user.setBalance(rs.getDouble("balance"));
+                user.setRole(rs.getString("role"));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
         return user;
     }
@@ -69,20 +118,20 @@ class UsersDao extends AbstractDao<UserBean> {
             log.error(e.getMessage());
             return null;
         } finally {
-            connectionPool.putConnection(connection);
+            connectionPool.freeConnection(connection);
         }
         return users;
     }
 
     @Override
     public void add(UserBean user) {
-        String sql = "INSERT INTO users VALUES ("
-                + user.getName() + ", "
-                + user.getLogin() + ", "
-                + user.getPassword() + ", "
-                + user.getBalance() + ", "
-                + user.getRole() + ")";
-        executeQuery(sql);
+        String sql = "INSERT INTO users(name, login, password, balance, role) VALUES('"
+                + user.getName() + "', '"
+                + user.getLogin() + "', '"
+                + user.getPassword() + "', '"
+                + user.getBalance() + "', '"
+                + user.getRole() + "')";
+        execute(sql);
     }
 
     @Override
@@ -93,6 +142,6 @@ class UsersDao extends AbstractDao<UserBean> {
                 ", balance=" + user.getBalance()+
                 ", role=" + user.getRole()+
                 "WHERE id_user=" + user.getIdUser();
-        executeQuery(sql);
+        execute(sql);
     }
 }

@@ -11,7 +11,7 @@ public class UserBean {
 
     public UserBean(){}
 
-    public UserBean(int idUser, String name, String login, String password, double balance, String role) {
+    public UserBean(String name, String login, String password, double balance, String role) {
         this.idUser = idUser;
         this.name = name;
         this.login = login;
