@@ -1,4 +1,4 @@
-package DAO;
+package DAO.Horses;
 
 public class HorsesBean {
     private int idHorse;

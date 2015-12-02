@@ -1,4 +1,4 @@
-package DAO;
+package DAO.Race;
 
 public class RaceBean {
     private int idRace;

@@ -1,4 +1,4 @@
-package DAO;
+package DAO.Bet;
 
 public class BetBean {
     private int idBet;
