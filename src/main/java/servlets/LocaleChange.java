@@ -1,3 +1,5 @@
+package servlets;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -6,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.jstl.core.Config;
 import java.io.IOException;
 
-@WebServlet(name = "LocaleChange", urlPatterns = "/localeChange")
+@WebServlet(name = "servlets.LocaleChange", urlPatterns = "/localeChange")
 public class LocaleChange extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String language = request.getParameter("buttonLocale");

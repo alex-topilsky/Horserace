@@ -7,17 +7,18 @@
 </head>
 <body>
 
-
 <form action="/localeChange" method="post">
     <input type="submit" name="buttonLocale" value="RU" />
     <input type="submit" name="buttonLocale" value="EN" />
 </form>
 
-
 <fmt:bundle basename="locale"/>
 <fmt:message key="welcome"/>
 
 <%@ include file="/login.jsp"%>
+
+<a href="/horseList"> You can see horses list</a> <br/>
+<a href="/allHorserace"> You can see horserace list</a> <br/>
 
 <c:if test="${not empty language}">
     ${language}

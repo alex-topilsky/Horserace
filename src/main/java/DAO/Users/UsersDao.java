@@ -103,8 +103,9 @@ public class UsersDao extends AbstractDao<UserBean> {
         Connection connection = connectionPool.getConnection();
         try {
             ResultSet rs = connection.createStatement().executeQuery(sql);
-            UserBean user = new UserBean();
+            UserBean user;
             while (rs.next()) {
+                user = new UserBean();
                 user.setIdUser(rs.getInt("id_user"));
                 user.setName(rs.getString("name"));
                 user.setLogin(rs.getString("login"));

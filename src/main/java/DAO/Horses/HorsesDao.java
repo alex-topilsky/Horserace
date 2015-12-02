@@ -54,8 +54,9 @@ public class HorsesDao extends AbstractDao<HorsesBean> {
         Connection connection = connectionPool.getConnection();
         try {
             ResultSet rs = connection.createStatement().executeQuery(sql);
-            HorsesBean horse = new HorsesBean();
+            HorsesBean horse;
             while (rs.next()) {
+                horse = new HorsesBean();
                 horse.setIdHorse(rs.getInt("id_horse"));
                 horse.setName(rs.getString("name"));
                 horse.setAge(rs.getInt("age"));

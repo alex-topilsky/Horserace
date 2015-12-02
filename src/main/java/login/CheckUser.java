@@ -7,14 +7,14 @@ import DAO.Users.UsersDao;
 import java.sql.*;
 
 public class CheckUser {
-    protected static boolean isUserCorrect(String login, String password) {
+    protected static UserBean getUser(String login, String password) {
         if (login == null || password == null)
-            return false;
+            return null;
         UsersDao userDao = new UsersDao(new FactoryDao().getConnectionPool());
         UserBean user = userDao.getUser(login, password);
         if (user != null && user.getIdUser()!=0) {
-            return true;
-        } else return false;
+            return user;
+        } else return null;
     }
 
     protected static boolean isAlreadyUse(String login) {

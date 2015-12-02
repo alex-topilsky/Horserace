@@ -1,11 +1,18 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title><fmt:message key="welcome"/></title>
 </head>
 <body>
-Закрытая страница<br/>
+Close page<br/>
 <br/>
-123
+
+<jsp:useBean id="user" scope="session" type="DAO.Users.UserBean" />
+
+${user.getName()}
+
+<a href="/myBets"> My bet list</a> <br/>
+
 </body>
 </html>

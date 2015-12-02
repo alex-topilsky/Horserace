@@ -54,8 +54,35 @@ public class BetDao extends AbstractDao<BetBean> {
         Connection connection = connectionPool.getConnection();
         try {
             ResultSet rs = connection.createStatement().executeQuery(sql);
-            BetBean bet = new BetBean();
+            BetBean bet;
             while (rs.next()) {
+                bet = new BetBean();
+                bet.setIdBet(rs.getInt("id_bet"));
+                bet.setIdRace(rs.getInt("id_race"));
+                bet.setIdUser(rs.getInt("id_user"));
+                bet.setRate(rs.getDouble("rate"));
+
+                bets.add(bet);
+            }
+        } catch (SQLException e) {
+            log.error(e.getMessage());
+            return null;
+        } finally {
+            connectionPool.freeConnection(connection);
+        }
+        return bets;
+    }
+
+    public List<BetBean> getAll(int idUser) {
+        ArrayList<BetBean> bets = new ArrayList<>();
+        String sql = "SELECT * FROM bet WHERE id_user="+idUser;
+
+        Connection connection = connectionPool.getConnection();
+        try {
+            ResultSet rs = connection.createStatement().executeQuery(sql);
+            BetBean bet;
+            while (rs.next()) {
+                bet = new BetBean();
                 bet.setIdBet(rs.getInt("id_bet"));
                 bet.setIdRace(rs.getInt("id_race"));
                 bet.setIdUser(rs.getInt("id_user"));

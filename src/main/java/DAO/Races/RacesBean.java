@@ -6,13 +6,15 @@ public class RacesBean {
     private int idRaces;
     private double winRate;
     private Date dateRace;
+    private String nameRaces;
 
     public RacesBean(){}
 
-    public RacesBean(int idRaces, double winRate, Date dateRace) {
+    public RacesBean(int idRaces, double winRate, Date dateRace, String nameRaces) {
         this.idRaces = idRaces;
         this.winRate = winRate;
         this.dateRace = dateRace;
+        this.nameRaces = nameRaces;
     }
 
     public int getIdRaces() {
@@ -37,5 +39,13 @@ public class RacesBean {
 
     public void setDateRace(Date dateRace) {
         this.dateRace = dateRace;
+    }
+
+    public String getNameRaces() {
+        return nameRaces;
+    }
+
+    public void setNameRaces(String nameRaces) {
+        this.nameRaces = nameRaces;
     }
 }

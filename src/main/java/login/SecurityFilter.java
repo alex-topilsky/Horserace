@@ -1,5 +1,7 @@
 package login;
 
+import DAO.Users.UserBean;
+
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.annotation.WebServlet;
@@ -17,13 +19,22 @@ public class SecurityFilter implements Filter {
         HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
         HttpServletResponse httpServletResponse = (HttpServletResponse) servletResponse;
 
-        String username = httpServletRequest.getParameter("j_username");
-        String password = httpServletRequest.getParameter("j_password");
-
-        if (CheckUser.isUserCorrect(username, password))
-            filterChain.doFilter(servletRequest, servletResponse);
+        if (httpServletRequest.getSession().getAttribute("user") == null) {
+            String username = httpServletRequest.getParameter("j_username");
+            String password = httpServletRequest.getParameter("j_password");
+            UserBean user = CheckUser.getUser(username, password);
+            if (user != null) {
+                httpServletRequest.getSession().invalidate();
+                 httpServletRequest.getSession().setAttribute("user", user);
+                servletRequest = httpServletRequest;
+                filterChain.doFilter(servletRequest, servletResponse);
+            } else
+                httpServletRequest.getRequestDispatcher("error.jsp").forward(httpServletRequest, httpServletResponse);
+        }
         else
-            httpServletRequest.getRequestDispatcher("error.jsp").forward(httpServletRequest, httpServletResponse);
+        {
+            filterChain.doFilter(servletRequest, servletResponse);
+        }
     }
 
     public void destroy() {

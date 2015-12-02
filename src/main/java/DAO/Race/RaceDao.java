@@ -54,8 +54,35 @@ public class RaceDao extends AbstractDao<RaceBean> {
         Connection connection = connectionPool.getConnection();
         try {
             ResultSet rs = connection.createStatement().executeQuery(sql);
-            RaceBean raceBean = new RaceBean();
+            RaceBean raceBean;
             while (rs.next()) {
+                raceBean = new RaceBean();
+                raceBean.setIdRace(rs.getInt("id_race"));
+                raceBean.setIdRaces(rs.getInt("id_races"));
+                raceBean.setIdHorse(rs.getInt("id_horse"));
+                raceBean.setWinner(rs.getBoolean("winner"));
+
+                race.add(raceBean);
+            }
+        } catch (SQLException e) {
+            log.error(e.getMessage());
+            return null;
+        } finally {
+            connectionPool.freeConnection(connection);
+        }
+        return race;
+    }
+
+    public List<RaceBean> getAll(int id_races) {
+        ArrayList<RaceBean> race = new ArrayList<>();
+        String sql = "SELECT * FROM race WHERE id_races="+id_races;
+
+        Connection connection = connectionPool.getConnection();
+        try {
+            ResultSet rs = connection.createStatement().executeQuery(sql);
+            RaceBean raceBean;
+            while (rs.next()) {
+                raceBean = new RaceBean();
                 raceBean.setIdRace(rs.getInt("id_race"));
                 raceBean.setIdRaces(rs.getInt("id_races"));
                 raceBean.setIdHorse(rs.getInt("id_horse"));

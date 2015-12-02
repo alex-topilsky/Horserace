@@ -35,7 +35,7 @@ public class RacesDao extends AbstractDao<RacesBean>{
                 races.setIdRaces(rs.getInt("id_races"));
                 races.setDateRace(rs.getDate("date"));
                 races.setWinRate(rs.getDouble("win_rate"));
-
+                races.setNameRaces(rs.getString("name_race"));
             }
         } catch (SQLException e) {
             log.error(e.getMessage());
@@ -53,11 +53,13 @@ public class RacesDao extends AbstractDao<RacesBean>{
         Connection connection = connectionPool.getConnection();
         try {
             ResultSet rs = connection.createStatement().executeQuery(sql);
-            RacesBean race = new RacesBean();
+            RacesBean race;
             while (rs.next()) {
+                race = new RacesBean();
                 race.setIdRaces(rs.getInt("id_races"));
                 race.setDateRace(rs.getDate("date"));
                 race.setWinRate(rs.getDouble("win_rate"));
+                race.setNameRaces(rs.getString("name_race"));
 
                 races.add(race);
             }
@@ -72,9 +74,10 @@ public class RacesDao extends AbstractDao<RacesBean>{
 
     @Override
     public void add(RacesBean races) {
-        String sql = "INSERT INTO races VALUES ("
-                + races.getDateRace() + ", "
-                + races.getWinRate() + ")";
+        String sql = "INSERT INTO races VALUES ('"
+                + races.getDateRace() + "', '"
+                + races.getWinRate() + "', '"
+                + races.getNameRaces() + "')";
         executeQuery(sql);
     }
 
@@ -82,6 +85,7 @@ public class RacesDao extends AbstractDao<RacesBean>{
     public void edit(RacesBean races) {
         String sql = "UPDATE races SET win_rate=" + races.getWinRate()+
                 ", date=" + races.getDateRace()+
+                ", name_races=" + races.getNameRaces() +
                 "WHERE id_races=" + races.getIdRaces();
         executeQuery(sql);
     }
