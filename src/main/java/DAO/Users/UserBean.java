@@ -9,6 +9,8 @@ public class UserBean {
     private double balance;
     private String role;
 
+    public UserBean(){}
+
     public UserBean(int idUser, String name, String login, String password, double balance, String role) {
         this.idUser = idUser;
         this.name = name;

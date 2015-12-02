@@ -6,6 +6,8 @@ public class BetBean {
     private int idUser;
     private double rate;
 
+    public BetBean(){}
+
     public BetBean(int idBet, int idRace, int idUser, double rate) {
         this.idBet = idBet;
         this.idRace = idRace;

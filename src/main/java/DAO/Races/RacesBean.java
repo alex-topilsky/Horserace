@@ -7,6 +7,8 @@ public class RacesBean {
     private double winRate;
     private Date dateRace;
 
+    public RacesBean(){}
+
     public RacesBean(int idRaces, double winRate, Date dateRace) {
         this.idRaces = idRaces;
         this.winRate = winRate;

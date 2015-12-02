@@ -6,6 +6,8 @@ public class HorsesBean {
     private int age;
     private String bread;
 
+    public HorsesBean(){}
+
     public HorsesBean(int idHorse, String name, int age, String bread) {
         this.idHorse = idHorse;
         this.name = name;

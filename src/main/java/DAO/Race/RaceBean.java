@@ -4,13 +4,15 @@ public class RaceBean {
     private int idRace;
     private int idRaces;
     private int idHorse;
-    private boolean win;
+    private boolean winner;
+
+    public RaceBean(){}
 
     public RaceBean(int idRace, int idRaces, int idHorse, boolean win) {
         this.idRace = idRace;
         this.idRaces = idRaces;
         this.idHorse = idHorse;
-        this.win = win;
+        this.winner = winner;
     }
 
     public int getIdRace() {
@@ -37,11 +39,11 @@ public class RaceBean {
         this.idHorse = idHorse;
     }
 
-    public boolean isWin() {
-        return win;
+    public boolean getWinner() {
+        return winner;
     }
 
-    public void setWin(boolean win) {
-        this.win = win;
+    public void setWinner(boolean win) {
+        this.winner = winner;
     }
 }
