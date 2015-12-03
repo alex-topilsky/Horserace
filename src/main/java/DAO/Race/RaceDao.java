@@ -75,7 +75,7 @@ public class RaceDao extends AbstractDao<RaceBean> {
 
     public List<RaceBean> getAll(int id_races) {
         ArrayList<RaceBean> race = new ArrayList<>();
-        String sql = "SELECT * FROM race WHERE id_races="+id_races;
+        String sql = "SELECT * FROM race WHERE id_races=" + id_races;
 
         Connection connection = connectionPool.getConnection();
         try {
@@ -101,11 +101,18 @@ public class RaceDao extends AbstractDao<RaceBean> {
 
     @Override
     public void add(RaceBean race) {
-        String sql = "INSERT INTO race VALUES ("
-                + race.getIdRaces() + ", "
-                + race.getIdHorse() + ", "
-                + race.getWinner() + ")";
-        execute(sql);
+        if (race.getWinner() == null) {
+            String sql = "INSERT INTO race(id_races, id_horse) VALUES ('"
+                    + race.getIdRaces() + "', '"
+                    + race.getIdHorse() + "')";
+            execute(sql);
+        } else {
+            String sql = "INSERT INTO race(id_races, id_horse, winner) VALUES ('"
+                    + race.getIdRaces() + "', '"
+                    + race.getIdHorse() + "', '"
+                    + race.getWinner() + "')";
+            execute(sql);
+        }
     }
 
     @Override

@@ -51,13 +51,6 @@ public class AdminEditor  extends HttpServlet {
             races.setNameRaces(request.getParameter("nameRace"));
             racesDao.edit(races);
         }
-//        if (request.getParameter("winRateEdit") != null) {
-//            RacesDao racesDao = new RacesDao(new FactoryDao().getConnectionPool());
-//            RacesBean races = (RacesBean) racesDao.getItem(Integer.parseInt(request.getParameter("winRateEdit")));
-//
-//            races.setWinRate(Double.parseDouble(request.getParameter("winRate")));
-//            racesDao.edit(races);
-//        }
 
         if (request.getParameter("NewRace") != null) {
             RacesDao racesDao = new RacesDao(new FactoryDao().getConnectionPool());
@@ -80,6 +73,6 @@ public class AdminEditor  extends HttpServlet {
             racesDao.delete(races);
         }
 
-            request.getRequestDispatcher("/horseList").forward(request, response);
+            request.getRequestDispatcher("/allHorserace").forward(request, response);
     }
 }

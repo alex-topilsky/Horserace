@@ -7,10 +7,10 @@
 <body>
 <jsp:useBean id="racesList" scope="session" type="java.util.ArrayList" />
 
-<table>
+<table align="center" cellpadding="4" cellspacing="1">
     <thead>
     <tr>
-        <th>Number Race</th>
+        <th>Number</th>
         <th>rate</th>
         <th>date</th>
         <th>name</th>

@@ -10,11 +10,11 @@
 <jsp:useBean id="raceListHorses" scope="session" type="java.util.ArrayList" />
 
 Information about this race:  <br/>
-Name: ${raceListRaces.nameRaces} <br/>
-Date: ${raceListRaces.dateRace} <br/>
-Rate: ${raceListRaces.winRate} <br/>
+<b>Name: </b>${raceListRaces.nameRaces} <br/>
+<b>Date: </b>${raceListRaces.dateRace} <br/>
+<b>Rate:</b> ${raceListRaces.winRate} <br/>
 
-<table>
+<table align="center" cellpadding="4" cellspacing="1">
   <thead>
   <tr>
     <th>horse</th>
@@ -25,7 +25,11 @@ Rate: ${raceListRaces.winRate} <br/>
   <tbody>
   <c:forEach var="race" items="${raceList}">
     <tr>
-      <td>${raceListHorses.get(race.getIdHorse()-1).getName()}</td>
+      <td> <c:forEach var="horse" items="${raceListHorses}">
+      <c:if test="${horse.getIdHorse()==race.getIdHorse()}">
+        ${horse.getName()}
+      </c:if>
+    </c:forEach></td>
       <td>Autoriztion for do bet</td>
       <td>${race.getWinner()}</td>
     </tr>

@@ -6,6 +6,7 @@ import DAO.FactoryDao;
 import DAO.Race.RaceBean;
 import DAO.Race.RaceDao;
 import DAO.Users.UserBean;
+import DAO.Users.UsersDao;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -35,10 +36,17 @@ public class DoBet extends HttpServlet {
             throws ServletException, IOException {
         int id_race = Integer.parseInt(request.getParameter("doBet"));
         double rate = Double.parseDouble(request.getParameter("ValueBet"));
-        BetDao betDao = new BetDao(new FactoryDao().getConnectionPool());
-        UserBean user =(UserBean)request.getSession().getAttribute("user");
-        BetBean betBean = new BetBean(0, id_race, user.getIdUser(), rate);
-        betDao.add(betBean);
+        UserBean user = (UserBean) request.getSession().getAttribute("user");
+        if(user.getBalance()>rate) {
+            BetDao betDao = new BetDao(new FactoryDao().getConnectionPool());
+            BetBean betBean = new BetBean(0, id_race, user.getIdUser(), rate);
+            betDao.add(betBean);
+
+            double balance = user.getBalance();
+            user.setBalance(balance-rate);
+            UsersDao usersDao = new UsersDao(new FactoryDao().getConnectionPool());
+            usersDao.edit(user);
+        }
 
         request.getRequestDispatcher("table/userRaceInfo.jsp").include(request, response);
     }

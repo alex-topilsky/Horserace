@@ -34,23 +34,22 @@ public class RacesTable extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         RacesDao racesDao = new RacesDao(new FactoryDao().getConnectionPool());
-        ArrayList<RacesBean> races = (ArrayList<RacesBean>)racesDao.getAll();
+        ArrayList<RacesBean> races = (ArrayList<RacesBean>) racesDao.getAll();
 
         request.getSession().setAttribute("racesList", races);
 
-        if(request.getSession().getAttribute("user")!=null)
-        {
+        if (request.getSession().getAttribute("user") != null) {
             UserBean user = (UserBean) request.getSession().getAttribute("user");
-            if(CheckUser.isAdmin(user.getLogin(), user.getPassword()))
-            {
-                 response.sendRedirect("table/adminHorseraceTable.jsp");
+            if (CheckUser.isAdmin(user.getLogin(), user.getPassword())) {
+                response.sendRedirect("table/adminHorseraceTable.jsp");
+            } else {
+                if (CheckUser.isBookmaker(user.getLogin(), user.getPassword())) {
+                    request.getRequestDispatcher("table/bookmakerHorseraceTable.jsp").forward(request, response);
+                }else {
+                    request.getRequestDispatcher("table/allHorserace.jsp").forward(request, response);
+                }
             }
-            else
-            {
-                request.getRequestDispatcher("table/allHorserace.jsp").forward(request, response);
-            }
-        }
-        else {
+        } else {
             request.getRequestDispatcher("table/allHorserace.jsp").forward(request, response);
         }
     }

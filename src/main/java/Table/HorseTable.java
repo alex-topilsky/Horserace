@@ -47,6 +47,7 @@ public class HorseTable extends HttpServlet {
             }
             else
             {
+
                 request.getRequestDispatcher("table/horseList.jsp").forward(request, response);
             }
         }

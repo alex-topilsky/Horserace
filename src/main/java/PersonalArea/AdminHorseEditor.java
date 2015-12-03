@@ -5,8 +5,6 @@ import DAO.Horses.HorsesBean;
 import DAO.Horses.HorsesDao;
 import DAO.Race.RaceBean;
 import DAO.Race.RaceDao;
-import DAO.Races.RacesBean;
-import DAO.Races.RacesDao;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

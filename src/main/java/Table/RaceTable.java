@@ -38,10 +38,10 @@ public class RaceTable extends HttpServlet {
         int id_races = Integer.parseInt(request.getParameter("NumberRace"));
 
         RaceDao raceDao = new RaceDao(new FactoryDao().getConnectionPool());
-        ArrayList<RaceBean> race = (ArrayList<RaceBean>)raceDao.getAll(id_races);
+        ArrayList<RaceBean> race = (ArrayList<RaceBean>) raceDao.getAll(id_races);
 
         HorsesDao horsesDao = new HorsesDao(new FactoryDao().getConnectionPool());
-        ArrayList<HorsesBean> horses = (ArrayList<HorsesBean>)horsesDao.getAll();
+        ArrayList<HorsesBean> horses = (ArrayList<HorsesBean>) horsesDao.getAll();
 
 
         RacesDao racesDao = new RacesDao(new FactoryDao().getConnectionPool());
@@ -50,17 +50,24 @@ public class RaceTable extends HttpServlet {
         request.getSession().setAttribute("raceListHorses", horses);
         request.getSession().setAttribute("raceListRaces", races);
         request.getSession().setAttribute("raceList", race);
-        if(request.getSession().getAttribute("user")!=null) {
+
+        if (request.getSession().getAttribute("user") != null) {
             UserBean user = (UserBean) request.getSession().getAttribute("user");
             if (CheckUser.isUser(user.getLogin(), user.getPassword())) {
-                request.getRequestDispatcher("table/userRaceInfo.jsp").include(request, response);
-            }else
-            {
-                request.getRequestDispatcher("table/raceinfo.jsp").include(request, response);
+                request.getRequestDispatcher("table/userRaceInfo.jsp").forward(request, response);
+            } else {
+                if (CheckUser.isAdmin(user.getLogin(), user.getPassword())) {
+                    request.getRequestDispatcher("table/adminRaceInfo.jsp").forward(request, response);
+                } else {
+                    if (CheckUser.isBookmaker(user.getLogin(), user.getPassword())) {
+                        response.sendRedirect("table/raceinfo.jsp");
+                    } else {
+                        request.getRequestDispatcher("table/raceinfo.jsp").forward(request, response);
+                    }
+                }
             }
-        }else
-        {
-            request.getRequestDispatcher("table/raceinfo.jsp").include(request, response);
+        } else {
+            request.getRequestDispatcher("table/raceinfo.jsp").forward(request, response);
         }
     }
 }

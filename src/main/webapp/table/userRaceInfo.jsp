@@ -10,16 +10,16 @@
 <jsp:useBean id="raceListHorses" scope="session" type="java.util.ArrayList" />
 
 Information about this race:  <br/>
-Name: ${raceListRaces.nameRaces} <br/>
-Date: ${raceListRaces.dateRace} <br/>
-Rate: ${raceListRaces.winRate} <br/>
+<b>Name: </b>${raceListRaces.nameRaces} <br/>
+<b>Date: </b>${raceListRaces.dateRace} <br/>
+<b>Rate:</b> ${raceListRaces.winRate} <br/>
 
 <c:forEach var="race" items="${raceList}">
   <c:if test="${race.getWinner()==null}">
     <c:set var="win" scope="request" value="true"/>
 </c:if>
 </c:forEach>
-<table>
+<table align="center">
   <thead>
   <tr>
     <th>horse</th>
@@ -30,12 +30,16 @@ Rate: ${raceListRaces.winRate} <br/>
   <tbody>
   <c:forEach var="race" items="${raceList}">
     <tr>
-      <td>${raceListHorses.get(race.getIdHorse()-1).getName()}</td>
+      <td> <c:forEach var="horse" items="${raceListHorses}">
+        <c:if test="${horse.getIdHorse()==race.getIdHorse()}">
+          ${horse.getName()}
+        </c:if>
+      </c:forEach></td>
       <td>${race.getWinner()}</td>
       <td><c:if test="${raceListRaces.done!='done'}">
         <form action="/doBet" method="post">
-          <input name="ValueBet" type="text" value="" title="Date edit"/><br/>
-          <button type="submit" name="doBet" value="${race.getIdRace()}"> DateEdit </button>
+          <input name="ValueBet" type="text" value="" title="do Bet"/><br/>
+          <button type="submit" name="doBet" value="${race.getIdRace()}"> do Bet </button>
         </form>
       </c:if>
       </td>      

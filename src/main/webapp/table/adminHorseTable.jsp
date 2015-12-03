@@ -8,7 +8,7 @@
 
 <jsp:useBean id="horseList" scope="session" type="java.util.ArrayList" />
 
-<table>
+<table align="center" cellpadding="4" cellspacing="1">
   <thead>
   <tr>
     <th>id</th>
@@ -34,14 +34,14 @@
       ${horse.getAge()}
         <form action="/adminHorseTable" method="post">
           <input name="ageHorse" type="text" value="" title="Age horse edit"/><br/>
-          <button type="submit" name="ageHorseEdit" value="${horse.getIdHorse()}"> Name edit </button>
+          <button type="submit" name="ageHorseEdit" value="${horse.getIdHorse()}"> age edit </button>
         </form>
       </td>
       <td>
       ${horse.getBread()}
         <form action="/adminHorseTable" method="post">
           <input name="breadHorse" type="text" value="" title="Bread horse edit"/><br/>
-          <button type="submit" name="breadHorseEdit" value="${horse.getIdHorse()}"> Name edit </button>
+          <button type="submit" name="breadHorseEdit" value="${horse.getIdHorse()}"> bread edit </button>
         </form>
       </td>
       <td><form action="/adminHorseTable" method="post">

@@ -1,6 +1,10 @@
 package DAO.Races;
 
-import java.sql.Date;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class RacesBean {
     private int idRaces;
@@ -40,7 +44,15 @@ public class RacesBean {
     }
 
     public void setDateRace(String dateRace) {
-        this.dateRace = dateRace;
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = null;
+        try {
+            date = format.parse(dateRace);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        this.dateRace = df.format(date);
     }
 
     public String getNameRaces() {
