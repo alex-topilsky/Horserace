@@ -58,5 +58,12 @@ Date:  <input name="AddDateValue" type="text" value="" title="Date "/><br/>
   <button type="submit" name="NewRace" value="new"> Add new race </button>
 </form>
 
+<p>
+  <a href="/login.jsp"> You personal area</a> <br/>
+
+  <a href="/horseList"> You can see horses list</a> <br/>
+  <a href="/allHorserace"> You can see horserace list</a> <br/>
+</p>
+
 </body>
 </html>

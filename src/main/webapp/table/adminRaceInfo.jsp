@@ -56,6 +56,11 @@ Added horse to race:
     </select>
     <button type="submit" name="NumberRace" value="${raceListRaces.getIdRaces()}"> Add </button>
 </form>
+<p>
+    <a href="/login.jsp"> You personal area</a> <br/>
 
+    <a href="/horseList"> You can see horses list</a> <br/>
+    <a href="/allHorserace"> You can see horserace list</a> <br/>
+</p>
 </body>
 </html>

@@ -59,6 +59,11 @@ Add horse: <br/>
   Breed: <input name="breedHorse" type="text" value="" title="breed "/><br/>
   <button type="submit" name="NewHorse" value="new"> Add new horse </button>
 </form>
+<p>
+  <a href="/login.jsp"> You personal area</a> <br/>
 
+  <a href="/horseList"> You can see horses list</a> <br/>
+  <a href="/allHorserace"> You can see horserace list</a> <br/>
+</p>
 </body>
 </html>
