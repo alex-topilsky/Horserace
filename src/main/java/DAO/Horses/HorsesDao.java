@@ -79,7 +79,7 @@ public class HorsesDao extends AbstractDao<HorsesBean> {
                 + horse.getName() + ", "
                 + horse.getAge() + ", "
                 + horse.getBread() + ")";
-        executeQuery(sql);
+        execute(sql);
     }
 
     @Override
@@ -88,6 +88,6 @@ public class HorsesDao extends AbstractDao<HorsesBean> {
                 + ", age=" + horse.getAge()
                 + ", breed=" + horse.getBread()
                 + "WHERE id_horse=" + horse.getIdHorse();
-        executeQuery(sql);
+        executeUpdate(sql);
     }
 }

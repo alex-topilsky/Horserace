@@ -1,6 +1,8 @@
 package PersonalArea;
 
+import DAO.FactoryDao;
 import DAO.Users.UserBean;
+import DAO.Users.UsersDao;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -26,7 +28,13 @@ public class PersonalInfo extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //request.setAttribute("user", request.getSession().getAttribute("user"));
+
+        int value = Integer.parseInt(request.getParameter("replenishTheBalance"));
+        UserBean user = (UserBean) request.getSession().getAttribute("user");
+        user.setBalance(user.getBalance() + value);
+        UsersDao userDao = new UsersDao(new FactoryDao().getConnectionPool());
+        userDao.edit(user);
+        request.getSession().setAttribute("user", user);
         request.getRequestDispatcher("personalArea.jsp").include(request, response);
     }
 }

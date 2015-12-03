@@ -105,15 +105,15 @@ public class RaceDao extends AbstractDao<RaceBean> {
                 + race.getIdRaces() + ", "
                 + race.getIdHorse() + ", "
                 + race.getWinner() + ")";
-        executeQuery(sql);
+        execute(sql);
     }
 
     @Override
     public void edit(RaceBean race) {
-        String sql = "UPDATE race SET id_races=" + race.getIdRaces()
-                + ", id_horse=" + race.getIdHorse()
-                + ", winner=" + race.getWinner()
-                + "WHERE id_race=" + race.getIdRace();
-        executeQuery(sql);
+        String sql = "UPDATE race SET id_races='" + race.getIdRaces()
+                + "', id_horse='" + race.getIdHorse()
+                + "', winner='" + race.getWinner()
+                + "' WHERE id_race=" + race.getIdRace();
+        executeUpdate(sql);
     }
 }

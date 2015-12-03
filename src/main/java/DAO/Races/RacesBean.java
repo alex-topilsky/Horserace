@@ -5,12 +5,12 @@ import java.sql.Date;
 public class RacesBean {
     private int idRaces;
     private double winRate;
-    private Date dateRace;
+    private String dateRace;
     private String nameRaces;
 
     public RacesBean(){}
 
-    public RacesBean(int idRaces, double winRate, Date dateRace, String nameRaces) {
+    public RacesBean(int idRaces, double winRate, String dateRace, String nameRaces) {
         this.idRaces = idRaces;
         this.winRate = winRate;
         this.dateRace = dateRace;
@@ -33,11 +33,11 @@ public class RacesBean {
         this.winRate = winRate;
     }
 
-    public Date getDateRace() {
+    public String getDateRace() {
         return dateRace;
     }
 
-    public void setDateRace(Date dateRace) {
+    public void setDateRace(String dateRace) {
         this.dateRace = dateRace;
     }
 

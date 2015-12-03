@@ -12,10 +12,15 @@
     <input type="submit" name="buttonLocale" value="EN" />
 </form>
 
+<br/>
+<form action="/logaut" method="post">
+    <input type="submit" name="logaut" value="out" />
+</form>
+
 <fmt:bundle basename="locale"/>
 <fmt:message key="welcome"/>
 
-<%@ include file="/login.jsp"%>
+<a href="/login.jsp"> You personal area</a> <br/>
 
 <a href="/horseList"> You can see horses list</a> <br/>
 <a href="/allHorserace"> You can see horserace list</a> <br/>

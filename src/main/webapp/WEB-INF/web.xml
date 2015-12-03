@@ -42,4 +42,13 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
         <url-pattern>/personalArea.jsp</url-pattern>
     </filter-mapping>
 
+    <filter>
+        <filter-name>adminSecurity</filter-name>
+        <filter-class>login.AdminSecurity</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>adminSecurity</filter-name>
+        <url-pattern>/table/adminHorseTable.jsp</url-pattern>
+    </filter-mapping>
+
 </web-app>

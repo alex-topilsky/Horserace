@@ -105,7 +105,7 @@ public class BetDao extends AbstractDao<BetBean> {
                 + bet.getIdRace() + ", "
                 + bet.getIdUser() + ", "
                 + bet.getRate() + ")";
-        executeQuery(sql);
+        execute(sql);
     }
 
     @Override
@@ -114,6 +114,6 @@ public class BetDao extends AbstractDao<BetBean> {
                 + ", id_user=" + bet.getIdUser()
                 + ", rate=" + bet.getRate()
                 + "WHERE id_bet=" + bet.getIdBet();
-        executeQuery(sql);
+        executeUpdate(sql);
     }
 }

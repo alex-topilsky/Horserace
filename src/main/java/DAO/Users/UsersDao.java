@@ -137,12 +137,12 @@ public class UsersDao extends AbstractDao<UserBean> {
 
     @Override
     public void edit(UserBean user) {
-        String sql = "UPDATE users SET name=" + user.getName()+
-                ", login=" + user.getLogin()+
-                ", password=" + user.getPassword()+
-                ", balance=" + user.getBalance()+
-                ", role=" + user.getRole()+
-                "WHERE id_user=" + user.getIdUser();
-        execute(sql);
+        String sql = "UPDATE users SET name='" + user.getName()+
+                "', login='" + user.getLogin()+
+                "', password='" + user.getPassword()+
+                "', balance='" + user.getBalance()+
+                "', role='" + user.getRole()+
+                "' WHERE id_user=" + user.getIdUser();
+        executeUpdate(sql);
     }
 }

@@ -27,7 +27,7 @@ public class CheckUser {
         } else return false;
     }
 
-    public boolean isAdmin(String login, String password) {
+    public static boolean isAdmin(String login, String password) {
         if (login == null || password == null)
             return false;
         UsersDao userDao = new UsersDao(new FactoryDao().getConnectionPool());
