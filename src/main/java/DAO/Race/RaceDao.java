@@ -20,8 +20,8 @@ public class RaceDao extends AbstractDao<RaceBean> {
 
     @Override
     public void delete(RaceBean race) {
-        String sql = "DELETE * FROM race WHERE id_race=" + race.getIdRace();
-        executeQuery(sql);
+        String sql = "DELETE FROM race WHERE id_race=" + race.getIdRace();
+        executeUpdate(sql);
     }
 
     @Override
@@ -35,7 +35,7 @@ public class RaceDao extends AbstractDao<RaceBean> {
                 race.setIdRace(rs.getInt("id_race"));
                 race.setIdRaces(rs.getInt("id_races"));
                 race.setIdHorse(rs.getInt("id_horse"));
-                race.setWinner(rs.getBoolean("winner"));
+                race.setWinner(rs.getString("winner"));
 
             }
         } catch (SQLException e) {
@@ -60,7 +60,7 @@ public class RaceDao extends AbstractDao<RaceBean> {
                 raceBean.setIdRace(rs.getInt("id_race"));
                 raceBean.setIdRaces(rs.getInt("id_races"));
                 raceBean.setIdHorse(rs.getInt("id_horse"));
-                raceBean.setWinner(rs.getBoolean("winner"));
+                raceBean.setWinner(rs.getString("winner"));
 
                 race.add(raceBean);
             }
@@ -86,7 +86,7 @@ public class RaceDao extends AbstractDao<RaceBean> {
                 raceBean.setIdRace(rs.getInt("id_race"));
                 raceBean.setIdRaces(rs.getInt("id_races"));
                 raceBean.setIdHorse(rs.getInt("id_horse"));
-                raceBean.setWinner(rs.getBoolean("winner"));
+                raceBean.setWinner(rs.getString("winner"));
 
                 race.add(raceBean);
             }

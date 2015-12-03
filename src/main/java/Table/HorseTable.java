@@ -3,8 +3,11 @@ package Table;
 import DAO.FactoryDao;
 import DAO.Horses.HorsesBean;
 import DAO.Horses.HorsesDao;
+import DAO.Races.RacesBean;
+import DAO.Races.RacesDao;
 import DAO.Users.UserBean;
 import DAO.Users.UsersDao;
+import login.CheckUser;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -35,6 +38,20 @@ public class HorseTable extends HttpServlet {
         ArrayList<HorsesBean> horses = (ArrayList<HorsesBean>)horsesDao.getAll();
 
         request.getSession().setAttribute("horseList", horses);
-        request.getRequestDispatcher("table/horseList.jsp").include(request, response);
+        if(request.getSession().getAttribute("user")!=null)
+        {
+            UserBean user = (UserBean) request.getSession().getAttribute("user");
+            if(CheckUser.isAdmin(user.getLogin(), user.getPassword()))
+            {
+                response.sendRedirect("table/adminHorseTable.jsp");
+            }
+            else
+            {
+                request.getRequestDispatcher("table/horseList.jsp").forward(request, response);
+            }
+        }
+        else {
+            request.getRequestDispatcher("table/horseList.jsp").forward(request, response);
+        }
     }
 }

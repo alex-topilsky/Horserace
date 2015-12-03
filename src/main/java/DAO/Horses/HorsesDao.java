@@ -20,8 +20,8 @@ public class HorsesDao extends AbstractDao<HorsesBean> {
 
     @Override
     public void delete(HorsesBean horse) {
-        String sql = "DELETE * FROM horses WHERE id_horse=" + horse.getIdHorse();
-        executeQuery(sql);
+        String sql = "DELETE FROM horses WHERE id_horse=" + horse.getIdHorse();
+        executeUpdate(sql);
     }
 
     @Override
@@ -75,19 +75,19 @@ public class HorsesDao extends AbstractDao<HorsesBean> {
 
     @Override
     public void add(HorsesBean horse) {
-        String sql = "INSERT INTO horse VALUES ("
-                + horse.getName() + ", "
-                + horse.getAge() + ", "
-                + horse.getBread() + ")";
+        String sql = "INSERT INTO horses(name, age, breed) VALUES ('"
+                + horse.getName() + "', '"
+                + horse.getAge() + "', '"
+                + horse.getBread() + "')";
         execute(sql);
     }
 
     @Override
     public void edit(HorsesBean horse) {
-        String sql = "UPDATE horse SET name=" + horse.getName()
-                + ", age=" + horse.getAge()
-                + ", breed=" + horse.getBread()
-                + "WHERE id_horse=" + horse.getIdHorse();
+        String sql = "UPDATE horses SET name='" + horse.getName()
+                + "', age='" + horse.getAge()
+                + "', breed='" + horse.getBread()
+                + "' WHERE id_horse=" + horse.getIdHorse();
         executeUpdate(sql);
     }
 }

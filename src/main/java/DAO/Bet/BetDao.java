@@ -20,8 +20,8 @@ public class BetDao extends AbstractDao<BetBean> {
 
     @Override
     public void delete(BetBean bet) {
-        String sql = "DELETE * FROM bet WHERE id_bet=" + bet.getIdBet();
-        executeQuery(sql);
+        String sql = "DELETE FROM bet WHERE id_bet=" + bet.getIdBet();
+        executeUpdate(sql);
     }
 
     @Override
@@ -101,10 +101,10 @@ public class BetDao extends AbstractDao<BetBean> {
 
     @Override
     public void add(BetBean bet) {
-        String sql = "INSERT INTO bet VALUES ("
-                + bet.getIdRace() + ", "
-                + bet.getIdUser() + ", "
-                + bet.getRate() + ")";
+        String sql = "INSERT INTO bet(id_race, id_user, rate) VALUES ('"
+                + bet.getIdRace() + "', '"
+                + bet.getIdUser() + "', '"
+                + bet.getRate() + "')";
         execute(sql);
     }
 

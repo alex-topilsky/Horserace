@@ -20,8 +20,8 @@ public class RacesDao extends AbstractDao<RacesBean>{
 
     @Override
     public void delete(RacesBean races) {
-        String sql = "DELETE * FROM races WHERE id_races=" + races.getIdRaces();
-        executeQuery(sql);
+        String sql = "DELETE FROM races WHERE id_races=" + races.getIdRaces();
+        executeUpdate(sql);
     }
 
     @Override
@@ -36,6 +36,7 @@ public class RacesDao extends AbstractDao<RacesBean>{
                 races.setDateRace(rs.getString("date"));
                 races.setWinRate(rs.getDouble("win_rate"));
                 races.setNameRaces(rs.getString("name_race"));
+                races.setDone(rs.getString("done"));
             }
         } catch (SQLException e) {
             log.error(e.getMessage());
@@ -60,6 +61,7 @@ public class RacesDao extends AbstractDao<RacesBean>{
                 race.setDateRace(rs.getString("date"));
                 race.setWinRate(rs.getDouble("win_rate"));
                 race.setNameRaces(rs.getString("name_race"));
+                race.setDone(rs.getString("done"));
 
                 races.add(race);
             }
@@ -74,10 +76,11 @@ public class RacesDao extends AbstractDao<RacesBean>{
 
     @Override
     public void add(RacesBean races) {
-        String sql = "INSERT INTO races(win_rate, date, name_race) VALUES ('"
+        String sql = "INSERT INTO races(win_rate, date, name_race, done) VALUES ('"
                 + races.getWinRate() + "', '"
                 + races.getDateRace() + "', '"
-                + races.getNameRaces() + "')";
+                + races.getNameRaces() + "', '"
+                + races.getDone() + "')";
         execute(sql);
     }
 
@@ -86,6 +89,7 @@ public class RacesDao extends AbstractDao<RacesBean>{
         String sql = "UPDATE races SET win_rate='" + races.getWinRate()+
                 "', date='" + races.getDateRace()+
                 "', name_race='" + races.getNameRaces() +
+                "', done='" + races.getDone() +
                 "' WHERE id_races=" + races.getIdRaces();
         executeUpdate(sql);
     }

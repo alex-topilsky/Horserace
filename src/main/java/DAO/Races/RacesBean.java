@@ -7,14 +7,16 @@ public class RacesBean {
     private double winRate;
     private String dateRace;
     private String nameRaces;
+    private String done;
 
     public RacesBean(){}
 
-    public RacesBean(int idRaces, double winRate, String dateRace, String nameRaces) {
+    public RacesBean(int idRaces, double winRate, String dateRace, String nameRaces, String done) {
         this.idRaces = idRaces;
         this.winRate = winRate;
         this.dateRace = dateRace;
         this.nameRaces = nameRaces;
+        this.done=done;
     }
 
     public int getIdRaces() {
@@ -47,5 +49,13 @@ public class RacesBean {
 
     public void setNameRaces(String nameRaces) {
         this.nameRaces = nameRaces;
+    }
+
+    public String getDone() {
+        return done;
+    }
+
+    public void setDone(String done) {
+        this.done = done;
     }
 }

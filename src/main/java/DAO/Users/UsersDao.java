@@ -17,8 +17,8 @@ public class UsersDao extends AbstractDao<UserBean> {
 
     @Override
     public void delete(UserBean user) {
-        String sql = "DELETE * FROM users WHERE id_user=" + user.getIdUser();
-        executeQuery(sql);
+        String sql = "DELETE FROM users WHERE id_user=" + user.getIdUser();
+        executeUpdate(sql);
     }
 
     @Override

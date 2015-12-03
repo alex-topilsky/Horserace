@@ -14,6 +14,7 @@
         <th>rate</th>
         <th>date</th>
         <th>name</th>
+        <th>done</th>
         <th>show info</th>
     </tr>
     </thead>
@@ -24,6 +25,7 @@
             <td>${races.getWinRate()}</td>
             <td>${races.getDateRace()}</td>
             <td>${races.getNameRaces()}</td>
+            <td>${races.getDone()}</td>
             <td><form action="/raceinfo" method="post">
                 <button type="submit" name="NumberRace" value="${races.getIdRaces()}"> Show </button> </form></td>
         </tr>

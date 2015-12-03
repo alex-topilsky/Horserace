@@ -5,6 +5,10 @@ import DAO.Bet.BetDao;
 import DAO.FactoryDao;
 import DAO.Horses.HorsesBean;
 import DAO.Horses.HorsesDao;
+import DAO.Race.RaceBean;
+import DAO.Race.RaceDao;
+import DAO.Races.RacesBean;
+import DAO.Races.RacesDao;
 import DAO.Users.UserBean;
 
 import javax.servlet.ServletException;
@@ -39,6 +43,18 @@ public class BetTable extends HttpServlet {
             BetDao betDao = new BetDao(new FactoryDao().getConnectionPool());
             ArrayList<BetBean> bets = (ArrayList<BetBean>) betDao.getAll(user.getIdUser());
 
+            HorsesDao horsesDao = new HorsesDao(new FactoryDao().getConnectionPool());
+            ArrayList<HorsesBean> horsesBeans = (ArrayList<HorsesBean>) horsesDao.getAll();
+
+            RacesDao racesDao = new RacesDao(new FactoryDao().getConnectionPool());
+            ArrayList<RacesBean> racesBeans = (ArrayList<RacesBean>) racesDao.getAll();
+
+            RaceDao raceDao = new RaceDao(new FactoryDao().getConnectionPool());
+            ArrayList<RaceBean> raceBeans = (ArrayList<RaceBean>) raceDao.getAll();
+
+            request.getSession().setAttribute("raceList", raceBeans);
+            request.getSession().setAttribute("horseList", horsesBeans);
+            request.getSession().setAttribute("racesList", racesBeans);
             request.getSession().setAttribute("betsList", bets);
             request.getRequestDispatcher("table/myBets.jsp").include(request, response);
         }else

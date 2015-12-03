@@ -7,6 +7,8 @@ import DAO.Race.RaceBean;
 import DAO.Race.RaceDao;
 import DAO.Races.RacesBean;
 import DAO.Races.RacesDao;
+import DAO.Users.UserBean;
+import login.CheckUser;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -48,6 +50,17 @@ public class RaceTable extends HttpServlet {
         request.getSession().setAttribute("raceListHorses", horses);
         request.getSession().setAttribute("raceListRaces", races);
         request.getSession().setAttribute("raceList", race);
-        request.getRequestDispatcher("table/raceinfo.jsp").include(request, response);
+        if(request.getSession().getAttribute("user")!=null) {
+            UserBean user = (UserBean) request.getSession().getAttribute("user");
+            if (CheckUser.isUser(user.getLogin(), user.getPassword())) {
+                request.getRequestDispatcher("table/userRaceInfo.jsp").include(request, response);
+            }else
+            {
+                request.getRequestDispatcher("table/raceinfo.jsp").include(request, response);
+            }
+        }else
+        {
+            request.getRequestDispatcher("table/raceinfo.jsp").include(request, response);
+        }
     }
 }

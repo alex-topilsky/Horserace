@@ -1,6 +1,8 @@
 package PersonalArea;
 
 import DAO.FactoryDao;
+import DAO.Race.RaceBean;
+import DAO.Race.RaceDao;
 import DAO.Races.RacesBean;
 import DAO.Races.RacesDao;
 import DAO.Users.UserBean;
@@ -49,22 +51,35 @@ public class AdminEditor  extends HttpServlet {
             races.setNameRaces(request.getParameter("nameRace"));
             racesDao.edit(races);
         }
-        if (request.getParameter("winRateEdit") != null) {
-            RacesDao racesDao = new RacesDao(new FactoryDao().getConnectionPool());
-            RacesBean races = (RacesBean) racesDao.getItem(Integer.parseInt(request.getParameter("winRateEdit")));
-
-            races.setWinRate(Double.parseDouble(request.getParameter("winRate")));
-            racesDao.edit(races);
-        }
+//        if (request.getParameter("winRateEdit") != null) {
+//            RacesDao racesDao = new RacesDao(new FactoryDao().getConnectionPool());
+//            RacesBean races = (RacesBean) racesDao.getItem(Integer.parseInt(request.getParameter("winRateEdit")));
+//
+//            races.setWinRate(Double.parseDouble(request.getParameter("winRate")));
+//            racesDao.edit(races);
+//        }
 
         if (request.getParameter("NewRace") != null) {
             RacesDao racesDao = new RacesDao(new FactoryDao().getConnectionPool());
-            RacesBean races = new RacesBean(0, Double.parseDouble(request.getParameter("AddWinRate")),
+            RacesBean races = new RacesBean(0, 0,
                     request.getParameter("AddDateValue"),
-                    request.getParameter("AddNameRace"));
+                    request.getParameter("AddNameRace"), "expected");
             racesDao.add(races);
         }
 
-            request.getRequestDispatcher("/allHorserace").forward(request, response);
+        if (request.getParameter("DeleteHorserace") != null) {
+            RacesDao racesDao = new RacesDao(new FactoryDao().getConnectionPool());
+            RacesBean races = (RacesBean) racesDao.getItem(Integer.parseInt(request.getParameter("DeleteHorserace")));
+
+            RaceDao raceDao = new RaceDao(new FactoryDao().getConnectionPool());
+            ArrayList<RaceBean> race = (ArrayList) raceDao.getAll(Integer.parseInt(request.getParameter("DeleteHorserace")));
+            for(RaceBean raceBean: race) {
+                raceDao.delete(raceBean);
+            }
+
+            racesDao.delete(races);
+        }
+
+            request.getRequestDispatcher("/horseList").forward(request, response);
     }
 }

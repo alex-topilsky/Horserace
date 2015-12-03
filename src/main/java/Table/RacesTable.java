@@ -43,7 +43,7 @@ public class RacesTable extends HttpServlet {
             UserBean user = (UserBean) request.getSession().getAttribute("user");
             if(CheckUser.isAdmin(user.getLogin(), user.getPassword()))
             {
-                 response.sendRedirect("table/adminHorseTable.jsp");
+                 response.sendRedirect("table/adminHorseraceTable.jsp");
             }
             else
             {
